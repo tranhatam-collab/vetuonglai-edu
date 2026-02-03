@@ -3,24 +3,15 @@ main = "src/index.js"
 compatibility_date = "2024-12-01"
 workers_dev = true
 
-# Routes anh đã add trong Cloudflare UI rồi thì phần routes dưới đây có thể bỏ.
-# Nhưng để đồng bộ (không lệch), em vẫn để luôn:
-routes = [
-  { pattern = "edu.vetuonglai.com/*", zone_name = "vetuonglai.com" },
-  { pattern = "www.edu.vetuonglai.com/*", zone_name = "vetuonglai.com" }
-]
-
 [vars]
 APP_ORIGIN = "https://edu.vetuonglai.com"
 MAGIC_TTL_MIN = "15"
 MAIL_FROM = "reply@vetuonglai.com"
 
-# KV (anh phải thay đúng ID thật)
 [[kv_namespaces]]
 binding = "EDU_DB"
 id = "REPLACE_WITH_YOUR_EDU_DB_KV_ID"
 
-# R2 buckets (bucket_name phải đúng tên bucket thật anh đã tạo trong R2)
 [[r2_buckets]]
 binding = "EDU_DOCS"
 bucket_name = "EDU_DOCS"
