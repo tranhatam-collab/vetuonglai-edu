@@ -1,18 +1,22 @@
-import { handleCourses } from "./api/courses.js";
-
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // API Courses
-    if (
-      url.pathname.startsWith("/api/courses") ||
-      url.pathname.startsWith("/api/admin/courses")
-    ) {
-      return handleCourses(request, env);
+    if (url.pathname === "/health") return new Response("ok");
+
+    // check bindings quickly (optional)
+    if (url.pathname === "/debug/bindings") {
+      return Response.json({
+        hasKV: !!env.EDU_DB,
+        hasR2Docs: !!env.EDU_DOCS,
+        hasR2Media: !!env.EDU_MEDIA,
+        hasStripeKey: !!env.STRIPE_SECRET_KEY,
+        hasStripeWebhookSecret: !!env.STRIPE_WEBHOOK_SECRET,
+      });
     }
 
-    // fallback
-    return new Response("EDU Worker running", { status: 200 });
-  }
+    return new Response("EDU Worker is live.", {
+      headers: { "content-type": "text/plain; charset=utf-8" },
+    });
+  },
 };
