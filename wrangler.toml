@@ -1,28 +1,15 @@
-# ==============================
-# Cloudflare Workers – EDU
-# ==============================
-
 name = "vetuonglai-edu-github"
 main = "src/index.js"
-
-# Ngày deploy đầu tiên – khóa hành vi runtime
 compatibility_date = "2026-02-03"
+compatibility_flags = ["nodejs_compat"]
 
-# Account ID (lấy từ URL dashboard)
 account_id = "f3f9e76222dcb488d5e303e29e8ba192"
 
-# ==============================
-# KV namespaces
-# ==============================
 kv_namespaces = [
   { binding = "EDU_DB", id = "261d518acbd64691a48f1cfaf26ded4b" }
 ]
 
-# ==============================
-# R2 buckets
-# LƯU Ý: bucket_name PHẢI lowercase
-# ==============================
 r2_buckets = [
-  { binding = "EDU_DOCS", bucket_name = "edu-docs" },
+  { binding = "EDU_DOCS",  bucket_name = "edu-docs" },
   { binding = "EDU_MEDIA", bucket_name = "edu-media" }
 ]
