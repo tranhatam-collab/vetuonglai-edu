@@ -1,22 +1,16 @@
 export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
+  async fetch(req, env) {
+    // Test KV
+    await env.EDU_DB.put("health", "ok");
 
-    if (url.pathname === "/health") return new Response("ok");
+    // Test R2
+    const objects = await env.EDU_DOCS_BUCKET.list();
 
-    // check bindings quickly (optional)
-    if (url.pathname === "/debug/bindings") {
-      return Response.json({
-        hasKV: !!env.EDU_DB,
-        hasR2Docs: !!env.EDU_DOCS,
-        hasR2Media: !!env.EDU_MEDIA,
-        hasStripeKey: !!env.STRIPE_SECRET_KEY,
-        hasStripeWebhookSecret: !!env.STRIPE_WEBHOOK_SECRET,
-      });
-    }
-
-    return new Response("EDU Worker is live.", {
-      headers: { "content-type": "text/plain; charset=utf-8" },
+    return new Response(JSON.stringify({
+      status: "ok",
+      r2_docs_objects: objects.objects.length
+    }), {
+      headers: { "content-type": "application/json" }
     });
-  },
-};
+  }
+}
