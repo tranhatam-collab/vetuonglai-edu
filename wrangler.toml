@@ -1,16 +1,14 @@
 name = "vetuonglai-edu-github"
 main = "src/index.js"
-compatibility_date = "2025-02-01"
+compatibility_date = "2026-02-05"
 
-# ===== KV NAMESPACES =====
+# KV: chỉ giữ EDU_DB
 kv_namespaces = [
-  { binding = "EDU_DB", id = "261d518acbd64691a48f1cfaf26ded4b" },
-  { binding = "EDU_DOCS", id = "4a3ab9970b2f4b8da906386987bc7cee" },
-  { binding = "EDU_MEDIA", id = "5ddebaddadc6d46db8c346a1335b4f5cf" }
+  { binding = "EDU_DB", id = "261d518acbd64691a48f1cfaf26ded4b" }
 ]
 
-# ===== R2 BUCKETS (PHẢI lowercase) =====
+# R2: bucket_name phải là tên bucket thật (lowercase + hyphen)
 r2_buckets = [
-  { binding = "EDU_DOCS_BUCKET", bucket_name = "edu-docs" },
-  { binding = "EDU_MEDIA_BUCKET", bucket_name = "edu-media" }
+  { binding = "EDU_DOCS", bucket_name = "edu-docs" },
+  { binding = "EDU_MEDIA", bucket_name = "edu-media" }
 ]
